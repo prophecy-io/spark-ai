@@ -5,7 +5,7 @@ from typing import List
 from pyspark import Row
 from pyspark.sql.functions import expr, col
 
-from src.spark_ai.dbs.pinecone import PineconeDB, IdVector
+from spark_ai.dbs.pinecone import PineconeDB, IdVector
 from tests import BaseUnitTest
 
 

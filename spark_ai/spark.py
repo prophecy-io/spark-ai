@@ -24,8 +24,11 @@ class SparkUtils:
             nested_columns = SparkUtils._get_columns(df_element, current_type, expected_type)
             return with_alias(struct(*nested_columns))
         elif isinstance(current_type, ArrayType) and isinstance(expected_type, ArrayType):
+            current_element_type = current_type.elementType
+            expected_element_type = expected_type.elementType
+
             def array_element(row: Column):
-                return SparkUtils._get_column(row, '', current_type.elementType, expected_type.elementType)
+                return SparkUtils._get_column(row, '', current_element_type, expected_element_type)
 
             return with_alias(transform(df_element, array_element))
         elif isinstance(current_type, MapType) and isinstance(expected_type, MapType):

@@ -1,4 +1,3 @@
-import json
 from typing import List
 
 import openai
@@ -47,7 +46,7 @@ Answer:
 
             return {'embeddings': [embedding['embedding'] for embedding in response['data']], 'error': None}
         except Exception as error:
-            return {'embeddings': None, 'error': json.dumps(error)}
+            return {'embeddings': None, 'error': str(error)}
 
     @staticmethod
     def embed_texts_type():

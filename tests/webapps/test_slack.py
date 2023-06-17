@@ -3,7 +3,7 @@ import unittest
 
 from pyspark.sql import SparkSession
 
-from src.spark_ai.webapps.slack import SlackUtilities
+from spark_ai.webapps.slack import SlackUtilities
 from tests import BaseUnitTest
 
 
@@ -64,6 +64,10 @@ class TestSlackUtilities(BaseUnitTest):
         max_ts_per_channel = slack.find_max_ts_per_channel(df_conversations)
 
         self.assertTrue(len(max_ts_per_channel) >= 1)
+
+    # def test_read_events(self):
+    #     slack = self._init_slack()
+    #     slack.read_events(os.environ['SLACK_APP_TOKEN'], self.spark)
 
 
 if __name__ == '__main__':

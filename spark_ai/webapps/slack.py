@@ -221,3 +221,18 @@ class SlackUtilities:
                 break
 
         return messages
+
+    # def read_events(self, app_token: str, spark: SparkSession):
+    #     headers = {'Authorization': f'Bearer {app_token}'}
+    #     response = requests.post('https://slack.com/api/apps.connections.open', headers=headers).json()
+    #     if not response['ok']:
+    #         raise Exception(f"Could not open connection to Slack API: {response['error']}")
+    #
+    #     url = response['url']
+    #     print(url)
+    #
+    #     ws = websocket.WebSocketApp(url, on_message=lambda ws, msg: print(msg))
+    #     ws.run_forever()
+    #
+    #     df_events = spark.readStream.format("socket").option("host", url).load()
+    #     df_events.writeStream.format("console").outputMode("append").start().awaitTermination()
