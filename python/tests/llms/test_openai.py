@@ -4,8 +4,8 @@ from pyspark.sql import Window
 from pyspark.sql.functions import expr, col, row_number, ceil, collect_list, struct
 from pyspark.sql.types import Row
 
-from spark_ai.llms.openai import OpenAiLLM
-from tests import BaseUnitTest
+from python.spark_ai.llms.openai import OpenAiLLM
+from python.tests import BaseUnitTest
 
 
 class TestOpenAiLLM(BaseUnitTest):

@@ -5,7 +5,7 @@ import pinecone
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType
 
-from spark_ai.spark import SparkUtils
+from python.spark_ai.spark import SparkUtils
 
 
 @dataclass

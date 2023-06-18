@@ -3,8 +3,8 @@ import unittest
 
 from pyspark.sql import SparkSession
 
-from spark_ai.webapps.slack import SlackUtilities
-from tests import BaseUnitTest
+from python.spark_ai.webapps.slack import SlackUtilities
+from python.tests import BaseUnitTest
 
 
 class TestSlackUtilities(BaseUnitTest):
