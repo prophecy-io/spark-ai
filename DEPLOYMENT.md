@@ -1,0 +1,6 @@
+
+```sh
+sbt
+> assembly
+> publishSigned
+```

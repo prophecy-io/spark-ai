@@ -1,7 +1,7 @@
-package io_prophecy.spark_ai
+package io.prophecy.spark_ai
 
 import io.github.cdimascio.dotenv.Dotenv
-import io_prophecy.spark_ai.webapps.slack.SlackSocketClient
+import io.prophecy.spark_ai.webapps.slack.SlackSocketClient
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.scalatest.funsuite.AnyFunSuiteLike
 

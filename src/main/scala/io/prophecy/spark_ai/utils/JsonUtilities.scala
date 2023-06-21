@@ -1,4 +1,4 @@
-package io_prophecy.spark_ai.utils
+package io.prophecy.spark_ai.utils
 
 import com.fasterxml.jackson.core.JacksonException
 import org.json4s.{JObject, JValue, JsonAST, jackson}

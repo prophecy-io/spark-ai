@@ -1,8 +1,7 @@
-package io_prophecy.spark_ai.webapps.slack
+package io.prophecy.spark_ai.webapps.slack
 
-import io_prophecy.spark_ai.utils.JsonUtilities
-import org.json4s.{JObject, JString, JsonAST}
-import org.json4s.jackson.parseJson
+import io.prophecy.spark_ai.utils.JsonUtilities
+import org.json4s.JsonAST
 
 import java.net.URI
 import java.net.http.{HttpClient, HttpRequest, HttpResponse}

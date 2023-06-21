@@ -3,8 +3,8 @@ import unittest
 
 from pyspark.sql import SparkSession
 
-from python.spark_ai.webapps.slack import SlackUtilities
-from python.tests import BaseUnitTest
+from spark_ai.webapps.slack import SlackUtilities
+from tests import BaseUnitTest
 
 
 class TestSlackUtilities(BaseUnitTest):
@@ -65,9 +65,9 @@ class TestSlackUtilities(BaseUnitTest):
 
         self.assertTrue(len(max_ts_per_channel) >= 1)
 
-    # def test_read_events(self):
-    #     slack = self._init_slack()
-    #     slack.read_events(os.environ['SLACK_APP_TOKEN'], self.spark)
+    def test_write_messages(self):
+        slack = self._init_slack()
+
 
 
 if __name__ == '__main__':

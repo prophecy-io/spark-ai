@@ -1,7 +1,7 @@
-package io_prophecy.spark_ai.webapps.slack
+package io.prophecy.spark_ai.webapps.slack
 
-import io_prophecy.spark_ai.utils.JsonUtilities
-import io_prophecy.spark_ai.utils.JsonUtilities.{extractInt, extractObj, extractString}
+import io.prophecy.spark_ai.utils.JsonUtilities
+import JsonUtilities.{extractInt, extractObj, extractString}
 import org.json4s.JsonAST.JValue
 import org.json4s.jackson.JsonMethods.compact
 import org.json4s.{JObject, JString, JsonAST}

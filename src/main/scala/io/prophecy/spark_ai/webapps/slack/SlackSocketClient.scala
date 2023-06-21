@@ -1,6 +1,7 @@
-package io_prophecy.spark_ai.webapps.slack
+package io.prophecy.spark_ai.webapps.slack
 
-import io_prophecy.spark_ai.webapps.slack.SlackMessages.{SlackAcknowledge, SlackEvent, SlackHello, SlackResponse}
+import io.prophecy.spark_ai.webapps.slack.SlackMessages.{SlackEvent, SlackResponse}
+import SlackMessages.{SlackAcknowledge, SlackEvent, SlackHello, SlackResponse}
 
 import java.net.URI
 import java.net.http.{HttpClient, WebSocket}

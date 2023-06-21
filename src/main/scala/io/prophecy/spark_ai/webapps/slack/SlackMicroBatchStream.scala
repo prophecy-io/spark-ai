@@ -1,6 +1,7 @@
-package io_prophecy.spark_ai.webapps.slack
+package io.prophecy.spark_ai.webapps.slack
 
-import io_prophecy.spark_ai.webapps.slack.SlackMessages.SlackEvent
+import io.prophecy.spark_ai.webapps.slack.SlackMessages.SlackEvent
+import SlackMessages.SlackEvent
 import org.apache.spark.internal.Logging
 import org.apache.spark.sql.catalyst.InternalRow
 import org.apache.spark.sql.catalyst.util.DateTimeUtils

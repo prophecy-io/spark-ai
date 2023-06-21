@@ -1,6 +1,4 @@
-
 ThisBuild / scalaVersion := "2.12.17"
-ThisBuild / organization := "io_prophecy"
 
 lazy val hello = (project in file("."))
   .settings(
@@ -8,10 +6,53 @@ lazy val hello = (project in file("."))
     assemblyPackageScala / assembleArtifact := false
   )
 
-libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.4.0" % "provided"
-libraryDependencies += "org.apache.spark" %% "spark-streaming" % "3.4.0" % "provided"
+libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.3.2" % "provided"
+libraryDependencies += "org.apache.spark" %% "spark-streaming" % "3.3.2" % "provided"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.16" % Test
 libraryDependencies += "io.github.cdimascio" % "dotenv-java" % "3.0.0" % Test
-libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.4.0" % Test
-libraryDependencies += "org.apache.spark" %% "spark-streaming" % "3.4.0" % Test
+libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.3.2" % Test
+libraryDependencies += "org.apache.spark" %% "spark-streaming" % "3.3.2" % Test
+
+ThisBuild / organization := "io.prophecy"
+ThisBuild / organizationName := "Prophecy"
+ThisBuild / organizationHomepage := Some(url("https://www.prophecy.io"))
+
+ThisBuild / scmInfo := Some(
+  ScmInfo(
+    url("https://github.com/prophecy-io/spark-ai"),
+    "scm:git@github.com:prophecy-io/spark-ai.git"
+  )
+)
+
+ThisBuild / developers := List(
+  Developer(
+    id    = "several27",
+    name  = "Maciej Szpakowski",
+    email = "maciej@prophecy.io",
+    url   = url("https://www.prophecy.io")
+  )
+)
+
+ThisBuild / description := "A code-bapublishSignedsed framework for building Generative AI applications on top of Apache Spark."
+ThisBuild / licenses := List("The Unlicense" -> new URL("https://unlicense.org/"))
+ThisBuild / homepage := Some(url("https://prophecy.io"))
+
+// Remove all additional repository other than Maven Central from POM
+ThisBuild / pomIncludeRepository := { _ => false }
+
+import com.jsuereth.sbtpgp.PgpKeys.gpgCommand
+Global / gpgCommand := {
+  val sh = (baseDirectory.value / "gpg.sh").getAbsolutePath
+  sh
+}
+
+ThisBuild / publishTo := {
+  val nexus = "https://s01.oss.sonatype.org/"
+  if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
+  else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+}
+
+ThisBuild / publishMavenStyle := true
+
+ThisBuild / versionScheme := Some("early-semver")
