@@ -30,6 +30,11 @@ class SlackSocketClient(socketUrl: String) {
           .buildAsync(new URI(socketUrl), new WebSocketReceiver())
 
         SlackSocketClient.this.webSocketClient = Some(webSocketClient)
+
+//        while (!Thread.interrupted()) {
+//          Thread.sleep(1000)
+//          onEvent(SlackEvent("heartbeat", null, null, null, null, null))
+//        }
       }
     }
 

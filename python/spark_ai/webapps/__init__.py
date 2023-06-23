@@ -1,13 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 from pyspark.sql import SparkSession
-from pyspark.sql.types import StringType
+from pyspark.sql.types import StringType, BinaryType
 
 
 class WebUtils:
 
     def register_udfs(self, spark: SparkSession):
-        spark.udf.register('web_scrape', self.scrape, returnType=StringType())
+        spark.udf.register('web_scrape', self.scrape, returnType=BinaryType())
         spark.udf.register('web_scrape_text', self.scrape_text, returnType=StringType())
 
     @staticmethod

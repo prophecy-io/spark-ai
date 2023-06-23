@@ -28,7 +28,7 @@ class SlackStreamingSourceProviderTest extends AnyFunSuiteLike {
       .getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
 
-    val dfMessages = spark.readStream.format("io_prophecy.spark_ai.webapps.slack.SlackSourceProvider")
+    val dfMessages = spark.readStream.format("io.prophecy.spark_ai.webapps.slack.SlackSourceProvider")
       .option("token", token)
       .load()
 
