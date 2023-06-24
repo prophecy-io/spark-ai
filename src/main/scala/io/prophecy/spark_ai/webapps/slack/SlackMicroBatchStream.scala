@@ -1,12 +1,11 @@
 package io.prophecy.spark_ai.webapps.slack
 
 import io.prophecy.spark_ai.webapps.slack.SlackMessages.SlackEvent
-import SlackMessages.SlackEvent
 import org.apache.spark.internal.Logging
 import org.apache.spark.sql.catalyst.InternalRow
 import org.apache.spark.sql.catalyst.util.DateTimeUtils
-import org.apache.spark.sql.connector.read.{InputPartition, PartitionReader, PartitionReaderFactory}
 import org.apache.spark.sql.connector.read.streaming.{MicroBatchStream, Offset}
+import org.apache.spark.sql.connector.read.{InputPartition, PartitionReader, PartitionReaderFactory}
 import org.apache.spark.sql.execution.streaming.LongOffset
 import org.apache.spark.unsafe.types.UTF8String
 import org.json4s.jackson.JsonMethods.compact

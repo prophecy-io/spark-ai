@@ -1,24 +1,24 @@
 package io.prophecy.spark_ai
 
 import io.github.cdimascio.dotenv.Dotenv
-import io.prophecy.spark_ai.webapps.slack.SlackSocketClient
+import io.prophecy.spark_ai.webapps.slack.{SlackRestClient, SlackSocketClient}
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.scalatest.funsuite.AnyFunSuiteLike
+
+import java.util.UUID
 
 class SlackStreamingSourceProviderTest extends AnyFunSuiteLike {
 
   private val dotenv = Dotenv.load()
-  private val token = dotenv.get("SLACK_APP_TOKEN")
+  private val appToken = dotenv.get("SLACK_APP_TOKEN")
+  private val token = dotenv.get("SLACK_TOKEN")
 
-  test("Receiver") {
-    val client = SlackSocketClient.initFromToken(token) match {
-      case Right(client) => client
+  test("Test socket url") {
+    val client = new SlackRestClient(appToken)
+    client.socketUrl() match {
+      case Right(url) => assert(url.startsWith("wss://wss-primary.slack.com/"))
       case Left(error) => throw error
     }
-
-    client.start()
-    Thread.sleep(10000)
-    client.shutdown()
   }
 
   test("Hello, world!") {
@@ -29,16 +29,32 @@ class SlackStreamingSourceProviderTest extends AnyFunSuiteLike {
     spark.sparkContext.setLogLevel("WARN")
 
     val dfMessages = spark.readStream.format("io.prophecy.spark_ai.webapps.slack.SlackSourceProvider")
-      .option("token", token)
+      .option("token", appToken)
       .load()
 
-    dfMessages.writeStream
+    val expectedContent = UUID.randomUUID().toString
+    var found = false
+
+    val stream = dfMessages.writeStream
       .foreachBatch((batchDF: DataFrame, batchId: Long) => {
-        println("Batch id: " + batchId)
-        batchDF.show(truncate = false)
+        batchDF.collect().foreach(row => {
+          val content = row.getAs[String]("event")
+          if (content.contains(expectedContent)) {
+            found = true
+          }
+        })
       })
       .start()
-      .awaitTermination()
+
+    val restClient = new SlackRestClient(appToken, Some(token))
+    restClient.postMessage("C05CM7QDRRV", s"Automated test: $expectedContent") match {
+      case Right(_) => ()
+      case Left(error) => throw error
+    }
+
+    Thread.sleep(2500)
+    assert(found)
+    stream.stop()
   }
 
 }

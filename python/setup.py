@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="prophecy-spark-ai",
-    version="0.1.6",
+    version="0.1.7",
     url="https://github.com/prophecy-io/spark-ai",
     packages=find_packages(exclude=["tests", "tests.*"]),
     package_dir={'spark_ai': 'spark_ai'},

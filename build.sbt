@@ -6,13 +6,19 @@ lazy val hello = (project in file("."))
     assemblyPackageScala / assembleArtifact := false
   )
 
+libraryDependencies += "com.squareup.okhttp3" % "okhttp" % "4.10.0"
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.3.2" % "provided"
 libraryDependencies += "org.apache.spark" %% "spark-streaming" % "3.3.2" % "provided"
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.16" % Test
-libraryDependencies += "io.github.cdimascio" % "dotenv-java" % "3.0.0" % Test
+libraryDependencies += "io.github.cdimascio" % "dotenv-java" % "2.3.2" % Test
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.3.2" % Test
 libraryDependencies += "org.apache.spark" %% "spark-streaming" % "3.3.2" % Test
+
+ThisBuild / assemblyMergeStrategy  := {
+  case PathList("META-INF", _*) => MergeStrategy.discard
+  case _                        => MergeStrategy.first
+}
 
 ThisBuild / organization := "io.prophecy"
 ThisBuild / organizationName := "Prophecy"

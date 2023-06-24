@@ -1,12 +1,10 @@
 package io.prophecy.spark_ai.webapps.slack
 
-import io.prophecy.spark_ai.webapps.slack.SlackMessages.{SlackEvent, SlackResponse}
-import SlackMessages.{SlackAcknowledge, SlackEvent, SlackHello, SlackResponse}
+import io.prophecy.spark_ai.webapps.slack.SlackMessages.{SlackAcknowledge, SlackEvent, SlackHello, SlackResponse}
+import okhttp3._
 
-import java.net.URI
-import java.net.http.{HttpClient, WebSocket}
 import java.util.UUID
-import java.util.concurrent.{CompletableFuture, CompletionStage}
+import java.util.concurrent.TimeUnit
 import scala.collection.mutable
 
 object SlackSocketClient {
@@ -19,22 +17,26 @@ object SlackSocketClient {
 class SlackSocketClient(socketUrl: String) {
 
   private var socketThread: Option[Thread] = None
-  private var webSocketClient: Option[CompletableFuture[WebSocket]] = None
+
+  private var httpClient: Option[OkHttpClient] = None
+  private var webSocketClient: Option[WebSocket] = None
 
   def start(): Unit = {
     val socketThread = new Thread("SlackStream") {
       setDaemon(true)
 
       override def run(): Unit = {
-        val webSocketClient = HttpClient.newHttpClient().newWebSocketBuilder()
-          .buildAsync(new URI(socketUrl), new WebSocketReceiver())
+        val client = new OkHttpClient.Builder().readTimeout(0, TimeUnit.MILLISECONDS).build()
+        val request = new Request.Builder().url(socketUrl).build()
+        val websocket = client.newWebSocket(request, new WebSocketReceiver())
 
-        SlackSocketClient.this.webSocketClient = Some(webSocketClient)
+        httpClient = Some(client)
+        webSocketClient = Some(websocket)
 
-//        while (!Thread.interrupted()) {
-//          Thread.sleep(1000)
-//          onEvent(SlackEvent("heartbeat", null, null, null, null, null))
-//        }
+        // while (!Thread.interrupted()) {
+        //   Thread.sleep(1000)
+        //   onEvent(SlackEvent("heartbeat", null, null, null, null, null))
+        // }
       }
     }
 
@@ -63,25 +65,25 @@ class SlackSocketClient(socketUrl: String) {
   def shutdown(): Unit = {
     println("SlackSocketClient.onStop")
 
-    this.webSocketClient.foreach(_.join().abort())
-    this.webSocketClient.foreach(_.cancel(true))
+    this.webSocketClient.foreach(_.cancel())
+    this.httpClient.foreach(_.dispatcher().executorService().shutdown())
     this.socketThread.foreach(_.interrupt())
   }
 
-  private class WebSocketReceiver extends WebSocket.Listener {
+  private class WebSocketReceiver extends WebSocketListener {
     private val processedEventsChannelTs = new mutable.HashSet[(String, String)]()
 
-    override def onOpen(webSocket: WebSocket): Unit = {
-      super.onOpen(webSocket)
+    override def onOpen(webSocket: WebSocket, response: Response): Unit = {
+      super.onOpen(webSocket, response)
     }
 
-    override def onText(webSocket: WebSocket, data: CharSequence, last: Boolean): CompletionStage[_] = {
-      println(s"Got message: `$data`")
+    override def onMessage(webSocket: WebSocket, text: String): Unit = {
+      println(s"Got message: `$text`")
 
-      SlackResponse.parse(data.toString) match {
+      SlackResponse.parse(text) match {
         case Right(hello@SlackHello(_, _)) =>
           println(s"Got hello: $hello")
-        case Right(event@SlackEvent(envelopeId, ts, channel, text, user, raw)) =>
+        case Right(event@SlackEvent(envelopeId, ts, channel, _, _, _)) =>
           val key = (channel, ts)
 
           if (!processedEventsChannelTs.contains(key)) {
@@ -91,22 +93,19 @@ class SlackSocketClient(socketUrl: String) {
             println(s"This event has already been processed ($key)")
           }
 
-          webSocket.sendText(SlackAcknowledge(envelopeId).toString, true)
+          webSocket.send(SlackAcknowledge(envelopeId).toString)
         case Left(error) =>
           println(s"Failed to decode message: ${error.toString}")
       }
-
-      super.onText(webSocket, data, last)
     }
 
-    override def onClose(webSocket: WebSocket, statusCode: Int, reason: String): CompletionStage[_] = {
-      super.onClose(webSocket, statusCode, reason)
+    override def onClosed(webSocket: WebSocket, code: Int, reason: String): Unit = {
+      shutdown()
     }
 
-    override def onError(webSocket: WebSocket, error: Throwable): Unit = {
-      error.printStackTrace()
-
-      throw error
+    override def onFailure(webSocket: WebSocket, t: Throwable, response: Response): Unit = {
+      t.printStackTrace()
+      throw t
     }
   }
 
