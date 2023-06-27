@@ -21,6 +21,8 @@ Complete examples that anyone can start from to build their own Generative AI ap
 - [Chatbot Template](https://github.com/prophecy-samples/gen-ai-chatbot-template)
 - [Medical Advisor Template](https://github.com/prophecy-samples/gen-ai-med-avisor-template)
 
+Read about our thoughts on [Prompt engineering, LLMs, and Low-code here](https://www.prophecy.io/blog/prophecy-generative-ai-platform-applications-on-enterprise-data-built-in-hours). 
+
 ## Quickstart
 
 ### Installation
@@ -30,14 +32,19 @@ both the PySpark and Scala dependencies have to be present on the Spark cluster.
 
 ### Ingestion
 
-How to read all the conversations from Slack
-
 ```python
 from spark_ai.webapps.slack import SlackUtilities
 
+# Batch version
 slack = SlackUtilities(token='xoxb-...', spark=spark)
 df_channels = slack.read_channels()
 df_conversations = slack.read_conversations(df_channels)
+
+# Live streaming version
+df_messages = (spark.readStream
+    .format('io.prophecy.spark_ai.webapps.slack.SlackSourceProvider')
+    .option('token', 'xapp-...')
+    .load())
 ```
 
 ### Pre-processing & Vectorization
