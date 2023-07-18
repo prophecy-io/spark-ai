@@ -12,12 +12,16 @@ However, none of them are easy to use, deploy to production, nor can deal with t
 This project aims to provide a toolbox of Spark extensions, data sources, and utilities to make building robust
 data infrastructure on Spark for Generative AI applications easy.
 
+[![PyPI version](https://badge.fury.io/py/prophecy-spark-ai.svg)](https://badge.fury.io/py/prophecy-spark-ai) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.prophecy/spark-ai_2.12/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.prophecy/spark-ai_2.12)
+
 ## Example Applications
 
 Complete examples that anyone can start from to build their own Generative AI applications.
 
 - [Chatbot Template](https://github.com/prophecy-samples/gen-ai-chatbot-template)
 - [Medical Advisor Template](https://github.com/prophecy-samples/gen-ai-med-avisor-template)
+
+Read about our thoughts on [Prompt engineering, LLMs, and Low-code here](https://www.prophecy.io/blog/prophecy-generative-ai-platform-applications-on-enterprise-data-built-in-hours). 
 
 ## Quickstart
 
@@ -28,14 +32,19 @@ both the PySpark and Scala dependencies have to be present on the Spark cluster.
 
 ### Ingestion
 
-How to read all the conversations from Slack
-
 ```python
 from spark_ai.webapps.slack import SlackUtilities
 
+# Batch version
 slack = SlackUtilities(token='xoxb-...', spark=spark)
 df_channels = slack.read_channels()
 df_conversations = slack.read_conversations(df_channels)
+
+# Live streaming version
+df_messages = (spark.readStream
+    .format('io.prophecy.spark_ai.webapps.slack.SlackSourceProvider')
+    .option('token', 'xapp-...')
+    .load())
 ```
 
 ### Pre-processing & Vectorization
@@ -97,5 +106,7 @@ Application interfaces supported:
 
 - 🚧 Slack
 - 🗺️ Microsoft Teams
+
+And many more are coming soon (feel free to request as issues)! 🚀
 
 ✅: General Availability; 🚧: Beta availability; 🗺️: Roadmap; 
