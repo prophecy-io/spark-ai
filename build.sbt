@@ -6,7 +6,7 @@ lazy val hello = (project in file("."))
     assemblyPackageScala / assembleArtifact := false
   )
 
-libraryDependencies += "com.squareup.okhttp3" % "okhttp" % "4.10.0"
+libraryDependencies += "com.squareup.okhttp3" % "okhttp" % "4.9.3"
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.3.2" % "provided"
 libraryDependencies += "org.apache.spark" %% "spark-streaming" % "3.3.2" % "provided"
 

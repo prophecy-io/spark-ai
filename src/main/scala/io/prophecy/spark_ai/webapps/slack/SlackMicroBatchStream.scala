@@ -17,7 +17,7 @@ import scala.collection.mutable.ListBuffer
 
 object SlackMicroBatchStream {
 
-  private case class SlackInputPartition(slice: ListBuffer[(UTF8String, Long)]) extends InputPartition
+  private case class SlackInputPartition(slice: ListBuffer[(UTF8String, SlackEvent, Long)]) extends InputPartition
 
 }
 
@@ -35,7 +35,7 @@ class SlackMicroBatchStream(appToken: String, checkpointLocation: String) extend
    * Stored in a ListBuffer to facilitate removing committed batches.
    */
   @GuardedBy("this")
-  private val batches = new ListBuffer[(UTF8String, Long)]
+  private val batches = new ListBuffer[(UTF8String, SlackEvent, Long)]
 
   @GuardedBy("this")
   private var currentOffset: LongOffset = LongOffset(-1L)
@@ -62,6 +62,7 @@ class SlackMicroBatchStream(appToken: String, checkpointLocation: String) extend
     this.cancelEventListener = Some(client.addEventListener((event: SlackEvent) => synchronized {
       val newData = (
         UTF8String.fromString(compact(event.raw)),
+        event,
         DateTimeUtils.millisToMicros(Calendar.getInstance().getTimeInMillis)
       )
 
@@ -97,7 +98,7 @@ class SlackMicroBatchStream(appToken: String, checkpointLocation: String) extend
       batches.slice(sliceStart, sliceEnd)
     }
 
-    val slices = Array.fill(numPartitions)(new ListBuffer[(UTF8String, Long)])
+    val slices = Array.fill(numPartitions)(new ListBuffer[(UTF8String, SlackEvent, Long)])
     rawList.zipWithIndex.foreach { case (r, idx) =>
       slices(idx % numPartitions).append(r)
     }
@@ -117,7 +118,14 @@ class SlackMicroBatchStream(appToken: String, checkpointLocation: String) extend
         }
 
         override def get(): InternalRow = {
-          InternalRow(slice(currentIdx)._1, slice(currentIdx)._2)
+          val slackEvent = slice(currentIdx)._2
+          InternalRow(
+            slice(currentIdx)._1,
+            UTF8String.fromString(slackEvent.channel),
+            UTF8String.fromString(slackEvent.ts),
+            UTF8String.fromString(slackEvent.user),
+            UTF8String.fromString(slackEvent.text)
+          )
         }
 
         override def close(): Unit = {}

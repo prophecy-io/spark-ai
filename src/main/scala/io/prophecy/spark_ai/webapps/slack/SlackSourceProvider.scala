@@ -1,10 +1,9 @@
 package io.prophecy.spark_ai.webapps.slack
 
 import org.apache.spark.internal.Logging
-import org.apache.spark.sql.connector.catalog.{SupportsRead, SupportsWrite, Table, TableCapability}
-import org.apache.spark.sql.connector.read.{Scan, ScanBuilder}
+import org.apache.spark.sql.connector.catalog.{SupportsRead, Table, TableCapability}
 import org.apache.spark.sql.connector.read.streaming.MicroBatchStream
-import org.apache.spark.sql.connector.write.{LogicalWriteInfo, Write, WriteBuilder}
+import org.apache.spark.sql.connector.read.{Scan, ScanBuilder}
 import org.apache.spark.sql.internal.connector.SimpleTableProvider
 import org.apache.spark.sql.sources.DataSourceRegister
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
@@ -23,10 +22,16 @@ class SlackSourceProvider extends SimpleTableProvider with DataSourceRegister wi
   private class SlackStreamingTable(appToken: String) extends Table with SupportsRead {
     override def name(): String = "SlackStreamingTable"
 
-    override def schema(): StructType = StructType(StructField("event", StringType) :: Nil)
+    override def schema(): StructType = StructType(
+      StructField("event", StringType) ::
+        StructField("channel", StringType) ::
+        StructField("ts", StringType) ::
+        StructField("user", StringType) ::
+        StructField("text", StringType) :: Nil
+    )
 
-//    For Spark 3.4.0
-//    override def columns(): Array[Column] = Array(Column.create("event", StringType))
+    //    For Spark 3.4.0
+    //    override def columns(): Array[Column] = Array(Column.create("event", StringType))
 
     override def capabilities(): util.Set[TableCapability] = Set(TableCapability.MICRO_BATCH_READ).asJava
 

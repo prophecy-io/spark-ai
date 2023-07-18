@@ -226,7 +226,7 @@ class SlackUtilities:
         if not df.isStreaming:
             raise TypeError("Slack messages write is for streaming pipelines only")
 
-        df.writeStream.foreachBatch(self._write_batch).start()
+        df.writeStream.outputMode("update").foreachBatch(self._write_batch).start()
 
     def _write_batch(self, df_batch: DataFrame, epoch_id: int):
         responses = df_batch.collect()
