@@ -25,6 +25,8 @@ class Bedrock(ComponentSpec):
         # Potential values: embed_texts
         operation: str = "embed_texts"
         embed_text_column_name: Optional[str] = None
+        # Model properties
+        aws_region: Optional[str] = "us-east-1"
 
     def dialog(self) -> Dialog:
         def iff(property_name: str, value, then: Atom) -> Condition:
@@ -38,7 +40,7 @@ class Bedrock(ComponentSpec):
         credential_db = ColumnsLayout(gap="1rem") \
             .addElement(TextBox("Databricks Scope").bindProperty("credential_db_scope")) \
             .addElement(TextBox("Databricks Secret Key Name").bindProperty("credential_db_key")) \
-            .addElement(TextBox("Databricks Secret Secret Name").bindProperty("credential_db_secret"))
+            .addElement(TextBox("Databricks Secret Value Name").bindProperty("credential_db_secret"))
         credential_manual = ColumnsLayout(gap="1rem") \
             .addElement(TextBox("AWS Access Key Id").bindPlaceholder("AWS Access Key Id").bindProperty("credential_manual_key")) \
             .addElement(TextBox("AWS Access Secret Key").bindPlaceholder("AWS Access Secret Key").bindProperty("credential_manual_secret"))
@@ -58,6 +60,18 @@ class Bedrock(ComponentSpec):
             .bindProperty("embed_text_column_name") \
             .showErrorsFor("embed_text_column_name")
 
+        # Model container
+        aws_region = SelectBox("AWS Region") \
+            .addOption("us-east-1 - US East (N. Virginia)", "us-east-1") \
+            .addOption("us-west-2 - US West (Oregon)", "us-west-2") \
+            .addOption("ap-southeast-1 - Asia Pacific (Singapore)", "ap-southeast-1") \
+            .addOption("ap-northeast-1 - Asia Pacific (Tokyo)", "ap-northeast-1") \
+            .bindProperty("aws_region")
+
+        model_container = StackLayout(gap="1rem") \
+            .addElement(TitleElement("Model Properties")) \
+            .addElement(aws_region)
+
         # Main container
         operation_container = StackLayout(gap="1rem") \
             .addElement(TitleElement("Operation")) \
@@ -66,7 +80,8 @@ class Bedrock(ComponentSpec):
 
         main_container = StackLayout(padding="1rem", gap="2rem") \
             .addElement(credential) \
-            .addElement(operation_container)
+            .addElement(operation_container) \
+            .addElement(model_container)
         main_container.padding = "1rem"
         main_container.gap = "3rem"
         return Dialog("OpenAI").addElement(
@@ -105,7 +120,7 @@ class Bedrock(ComponentSpec):
             (BedrockLLM(
                 aws_access_key_id=access_key,
                 aws_secret_access_key=access_secret,
-                region_name="us-east-1")
+                region_name=self.props.aws_region)
              .register_udfs(spark=self.spark))
 
             return in0 \

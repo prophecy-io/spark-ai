@@ -1,0 +1,440 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "id" : "1",
+    "uri" : "pipelines/SageMakerEndpointTest",
+    "language" : "python",
+    "fabricId" : "5659",
+    "frontEndLanguage" : "sql",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "python",
+      "udfs" : [ ],
+      "functionPackageName" : "prophecy_io.spark_ai_gems.functions",
+      "sharedFunctionPackageNames" : [ "prophecy.spark_basic.functions", "prophecy.warehouse.functions" ]
+    },
+    "udafs" : {
+      "language" : "python",
+      "code" : ""
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12654",
+      "projectName" : "ProphecySparkBasicsPython",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12655",
+      "projectName" : "ProphecyWarehousePython",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "topLevelPackage" : "sagemakerendpointtest",
+    "configurationVersion" : "v1"
+  },
+  "connections" : [ {
+    "id" : "CGTUVW7ZqMbc0TLrTp__3",
+    "source" : "pl8m8JsWHWxuktqn5hEOz$$wbbFi4Kw6sMAv2wUbYZV5",
+    "sourcePort" : "eulE56p4jrbLuBgEPNoE3$$WA7GQCmYxnGsXLGTrNn6_",
+    "target" : "Lg6z2jpVKLRI9tYPFCJtm$$s2yTrcH7qaoVDJOuUI7W9",
+    "targetPort" : "OxSPPnGN4DE-wlfwoWH7V$$opfiXOunFS79qMEDYmK3B"
+  }, {
+    "id" : "-PoX2GLpi-VYRcAkitPYc$$sxgiPr3Erg9mC12TJu0rL",
+    "source" : "Lg6z2jpVKLRI9tYPFCJtm$$s2yTrcH7qaoVDJOuUI7W9",
+    "sourcePort" : "S0D-dGiNMOPJlmTk3-IfH$$Frfy_TQcSYsBzGmFlddQS",
+    "target" : "PLYKiBIPunE7w1F6gptMv$$oT5sVB4X-rw_xA67pmsWC",
+    "targetPort" : "_7gBWvQ0bkEM9C1Bzd8iq$$6UjmZB-8XXtuEHVJPOyIS"
+  }, {
+    "id" : "iar9OeEC8-exteFqLoiCu$$sjHpPsNac3MBSdk7ExglL",
+    "source" : "PLYKiBIPunE7w1F6gptMv$$oT5sVB4X-rw_xA67pmsWC",
+    "sourcePort" : "9LLhUXqocJC73VL0ImfEz$$Viaguy3NH-SG4-BPld8oK",
+    "target" : "604vRLq4lsRD8BhC556u5$$OAFvt-3ebFGAmUl6TYoZT",
+    "targetPort" : "Rgyn4qLCzT4YZZjUeasSK$$HNmego2c1ihjRRyaKGvxx"
+  } ],
+  "processes" : {
+    "pl8m8JsWHWxuktqn5hEOz$$wbbFi4Kw6sMAv2wUbYZV5" : {
+      "id" : "pl8m8JsWHWxuktqn5hEOz$$wbbFi4Kw6sMAv2wUbYZV5",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "empty_dataframe",
+        "slug" : "empty_dataframe",
+        "x" : -380,
+        "y" : 40,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "eulE56p4jrbLuBgEPNoE3$$WA7GQCmYxnGsXLGTrNn6_",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "id",
+              "type" : "long",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : true
+      },
+      "properties" : {
+        "script" : "out0 = spark.range(1)",
+        "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+        "scriptMethodFooter" : "    return out0"
+      }
+    },
+    "Lg6z2jpVKLRI9tYPFCJtm$$s2yTrcH7qaoVDJOuUI7W9" : {
+      "id" : "Lg6z2jpVKLRI9tYPFCJtm$$s2yTrcH7qaoVDJOuUI7W9",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "text_to_vector",
+        "slug" : "text_to_vector",
+        "x" : -180,
+        "y" : 40,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "OxSPPnGN4DE-wlfwoWH7V$$opfiXOunFS79qMEDYmK3B",
+          "slug" : "empty_dataframe",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "id",
+              "type" : "long",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "S0D-dGiNMOPJlmTk3-IfH$$Frfy_TQcSYsBzGmFlddQS",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "importLanguage" : "${$.workflow.metainfo.frontEndLanguage}",
+        "expressions" : [ {
+          "target" : "question",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "'Who is the president of United States?'"
+          },
+          "description" : ""
+        }, {
+          "target" : "context",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "'Barack Obama was the previous president of the United States. Donald Trump was the current president before Joe Biden took office.'"
+          },
+          "description" : ""
+        } ],
+        "importString" : "",
+        "activeTab" : "expressions",
+        "columnsSelector" : [ ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12654.git&subPath=&tag=0.0.4&projectSubscriptionProjectId=12654&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsPython"
+      }
+    },
+    "PLYKiBIPunE7w1F6gptMv$$oT5sVB4X-rw_xA67pmsWC" : {
+      "id" : "PLYKiBIPunE7w1F6gptMv$$oT5sVB4X-rw_xA67pmsWC",
+      "component" : "SageMakerEndpoint",
+      "metadata" : {
+        "label" : "answer",
+        "slug" : "answer",
+        "x" : 40,
+        "y" : 40,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "_7gBWvQ0bkEM9C1Bzd8iq$$6UjmZB-8XXtuEHVJPOyIS",
+          "slug" : "text_to_vector",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "question",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "context",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "9LLhUXqocJC73VL0ImfEz$$Viaguy3NH-SG4-BPld8oK",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "question",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "context",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "sagemaker_answer",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "choices",
+                  "type" : {
+                    "type" : "array",
+                    "elementType" : "string",
+                    "containsNull" : true
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "error",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : true
+      },
+      "properties" : {
+        "model_max_new_tokens" : 512,
+        "aws_region" : "eu-west-1",
+        "credential_manual_secret" : "",
+        "qa_query_column_name" : "question",
+        "credential_manual_key" : "",
+        "model_top_p" : "0.9",
+        "credential_type" : "databricks",
+        "order_by_column" : null,
+        "credential_db_scope" : "aws_main",
+        "model_temperature" : "0.6",
+        "credential_db_secret" : "secret_value",
+        "operation" : "answer_question",
+        "embed_text_column_name" : null,
+        "qa_context_column_name" : "context",
+        "credential_db_key" : "secret_key",
+        "model_endpoint_name" : "meta-textgeneration-llama-2-7b-f-2023-10-09-19-36-35-366",
+        "limit" : "10",
+        "qa_template" : "Answer the question based on the context below.\nContext:\n```\n{context}\n```\nQuestion: \n```\n{query}\n```\nAnswer:\n",
+        "group_data" : true
+      },
+      "componentInfo" : {
+        "gemId" : "gems/SageMakerEndpoint",
+        "projectName" : "spark-ai-gems"
+      }
+    },
+    "604vRLq4lsRD8BhC556u5$$OAFvt-3ebFGAmUl6TYoZT" : {
+      "id" : "604vRLq4lsRD8BhC556u5$$OAFvt-3ebFGAmUl6TYoZT",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "extract",
+        "slug" : "extract",
+        "x" : 240,
+        "y" : 40,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Rgyn4qLCzT4YZZjUeasSK$$HNmego2c1ihjRRyaKGvxx",
+          "slug" : "answer",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "question",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "context",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "sagemaker_answer",
+              "type" : {
+                "type" : "struct",
+                "fields" : [ {
+                  "name" : "choices",
+                  "type" : {
+                    "type" : "array",
+                    "elementType" : "string",
+                    "containsNull" : true
+                  },
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                }, {
+                  "name" : "error",
+                  "type" : "string",
+                  "nullable" : true,
+                  "metadata" : {
+                    "description" : "",
+                    "mappings" : [ ],
+                    "tags" : [ ]
+                  }
+                } ]
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "StMbc45tdSI8c4z4MLoEl$$BiB9Q-fTDqMvmEVdqcuQx",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "importLanguage" : "${$.workflow.metainfo.frontEndLanguage}",
+        "expressions" : [ {
+          "target" : "question",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "question"
+          },
+          "description" : ""
+        }, {
+          "target" : "answer",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "trim(sagemaker_answer.choices[0])"
+          },
+          "description" : ""
+        } ],
+        "importString" : "",
+        "activeTab" : "expressions",
+        "columnsSelector" : [ "Rgyn4qLCzT4YZZjUeasSK$$HNmego2c1ihjRRyaKGvxx##question", "Rgyn4qLCzT4YZZjUeasSK$$HNmego2c1ihjRRyaKGvxx##sagemaker_answer.choices", "Rgyn4qLCzT4YZZjUeasSK$$HNmego2c1ihjRRyaKGvxx##sagemaker_answer" ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12654.git&subPath=&tag=0.0.4&projectSubscriptionProjectId=12654&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsPython"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}

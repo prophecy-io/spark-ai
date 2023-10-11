@@ -45,7 +45,7 @@ Answer:
         model_max_new_tokens: Optional[int] = 512
         model_top_p: Optional[str] = "0.9"
         model_temperature: Optional[str] = "0.6"
-
+        aws_region: Optional[str] = "us-east-1"
 
     def dialog(self) -> Dialog:
         def iff(property_name: str, value, then: Atom) -> Condition:
@@ -59,7 +59,7 @@ Answer:
         credential_db = ColumnsLayout(gap="1rem") \
             .addElement(TextBox("Databricks Scope").bindProperty("credential_db_scope")) \
             .addElement(TextBox("Databricks Secret Key Name").bindProperty("credential_db_key")) \
-            .addElement(TextBox("Databricks Secret Secret Name").bindProperty("credential_db_secret"))
+            .addElement(TextBox("Databricks Secret Value Name").bindProperty("credential_db_secret"))
         credential_manual = ColumnsLayout(gap="1rem") \
             .addElement(TextBox("AWS Access Key Id").bindPlaceholder("AWS Access Key Id").bindProperty("credential_manual_key")) \
             .addElement(TextBox("AWS Access Secret Key").bindPlaceholder("AWS Access Secret Key").bindProperty("credential_manual_secret"))
@@ -110,8 +110,32 @@ Answer:
             .addElement(iff("operation", "answer_question", qa_column_selector)) \
             .addElement(iff("operation", "answer_question", qa_template))
 
-        # Model configuration container 
+        # Model configuration container
         model_endpoint_selection = TextBox("Endpoint Name").bindProperty("model_endpoint_name")
+
+        aws_region = SelectBox("AWS Region") \
+            .addOption("us-east-1 - US East (N. Virginia)", "us-east-1") \
+            .addOption("us-east-2 - US East (Ohio)", "us-east-2") \
+            .addOption("us-west-1 - US West (N. California)", "us-west-1") \
+            .addOption("us-west-2 - US West (Oregon)", "us-west-2") \
+            .addOption("ap-south-1 - Asia Pacific (Mumbai)", "ap-south-1") \
+            .addOption("ap-northeast-3 - Asia Pacific (Osaka)", "ap-northeast-3") \
+            .addOption("ap-northeast-2 - Asia Pacific (Seoul)", "ap-northeast-2") \
+            .addOption("ap-southeast-1 - Asia Pacific (Singapore)", "ap-southeast-1") \
+            .addOption("ap-southeast-2 - Asia Pacific (Sydney)", "ap-southeast-2") \
+            .addOption("ap-northeast-1 - Asia Pacific (Tokyo)", "ap-northeast-1") \
+            .addOption("ca-central-1 - Canada (Central)", "ca-central-1") \
+            .addOption("eu-central-1 - Europe (Frankfurt)", "eu-central-1") \
+            .addOption("eu-west-1 - Europe (Ireland)", "eu-west-1") \
+            .addOption("eu-west-2 - Europe (London)", "eu-west-2") \
+            .addOption("eu-west-3 - Europe (Paris)", "eu-west-3") \
+            .addOption("eu-north-1 - Europe (Stockholm)", "eu-north-1") \
+            .addOption("sa-east-1 - South America (São Paulo)", "sa-east-1") \
+            .bindProperty("aws_region")
+
+        model_details = ColumnsLayout(gap="1rem") \
+            .addElement(model_endpoint_selection) \
+            .addElement(aws_region)
 
         model_props = ColumnsLayout(gap="1rem") \
             .addElement(TextBox("Max New Tokens").bindProperty("model_max_new_tokens")) \
@@ -120,7 +144,7 @@ Answer:
 
         model_container = StackLayout(gap="1rem") \
             .addElement(TitleElement("Model configuration")) \
-            .addElement(model_endpoint_selection) \
+            .addElement(model_details) \
             .addElement(model_props)
             
         # Main container
@@ -167,7 +191,7 @@ Answer:
             (SageMakerLLM(
                 aws_access_key_id=access_key,
                 aws_secret_access_key=access_secret,
-                region_name="eu-west-1")
+                region_name=self.props.aws_region)
              .register_udfs(spark=self.spark))
 
             return in0 \

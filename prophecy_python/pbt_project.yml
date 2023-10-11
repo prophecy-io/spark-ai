@@ -10,13 +10,39 @@ buildSystemDetails:
   buildSystem: wheel
   author: null
   createdAt: '2023-10-11 01:11:45'
-pipelines: {}
+pipelines:
+  pipelines/BedrockTest:
+    name: BedrockTest
+    description: ''
+    author: maciej@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-10-11 03:18:47'
+    datasets:
+      inputs: []
+      outputs: []
+    subgraphs: []
+    dependencies: {}
+  pipelines/SageMakerEndpointTest:
+    name: SageMakerEndpointTest
+    description: ''
+    author: maciej@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-10-11 03:28:04'
+    datasets:
+      inputs: []
+      outputs: []
+    subgraphs: []
+    dependencies: {}
 datasets: {}
 templates: {}
 jobs: {}
 gemContainer:
-  languageVersion: ''
-  gemLibsVersion: ''
+  languageVersion: '3.10'
+  gemLibsVersion: 1.3.2.0
   gems:
     gems/Bedrock:
       name: Bedrock

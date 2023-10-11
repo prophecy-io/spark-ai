@@ -1,0 +1,278 @@
+{
+  "metainfo" : {
+    "migrationVersions" : {
+      "gemBuilderVersion" : "v1"
+    },
+    "id" : "1",
+    "uri" : "pipelines/BedrockTest",
+    "language" : "python",
+    "fabricId" : "5659",
+    "frontEndLanguage" : "sql",
+    "mode" : "batch",
+    "udfs" : {
+      "language" : "python",
+      "udfs" : [ ],
+      "functionPackageName" : "prophecy_io.spark_ai_gems.functions",
+      "sharedFunctionPackageNames" : [ "prophecy.spark_basic.functions", "prophecy.warehouse.functions" ]
+    },
+    "udafs" : {
+      "language" : "python",
+      "code" : ""
+    },
+    "configuration" : {
+      "common" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "oldCommon" : {
+        "type" : "record",
+        "fields" : [ ]
+      },
+      "fabrics" : { },
+      "instances" : { },
+      "selected" : "default",
+      "nonEditable" : [ ],
+      "isSubscribedPipelineWithPipelineConfigs" : false
+    },
+    "sparkConf" : [ ],
+    "hadoopConf" : [ ],
+    "codeMode" : "sparse",
+    "buildSystem" : "maven",
+    "externalDependencies" : [ ],
+    "dependentProjectExternalDependencies" : [ {
+      "projectUID" : "12654",
+      "projectName" : "ProphecySparkBasicsPython",
+      "externalDependencies" : [ ]
+    }, {
+      "projectUID" : "12655",
+      "projectName" : "ProphecyWarehousePython",
+      "externalDependencies" : [ ]
+    } ],
+    "isImported" : false,
+    "interimMode" : "Full",
+    "interimModeEnabled" : true,
+    "visualCodeInterimMode" : "Disabled",
+    "recordsLimit" : {
+      "enabled" : false,
+      "value" : 1000
+    },
+    "topLevelPackage" : "bedrocktest",
+    "configurationVersion" : "v1"
+  },
+  "connections" : [ {
+    "id" : "zophclz3GQmNe4tnPG3h_$$pVQ-wpGNFwe3efMYylBvC",
+    "source" : "k9syoIHQ592b0pYBEIKBp$$P2YFyxwJF8yP7DF0Y4fi8",
+    "sourcePort" : "SMf4nvCgkCu69RYE8fFMB$$bIASfdp5hv_iK-mUi8ywC",
+    "target" : "E4s58VeeXUxKP-6UwlEIz$$6jNNKiFn9E_iIvBQm0wD6",
+    "targetPort" : "dQ2AuzVVZGBP2u53G0mVk$$lvCwaNYBZ-WXGpV_BAqkE"
+  }, {
+    "id" : "nJQK7Fq3Gon_hh3y7eDt3$$c-7HC92hi9vqTLsW19Qkq",
+    "source" : "E4s58VeeXUxKP-6UwlEIz$$6jNNKiFn9E_iIvBQm0wD6",
+    "sourcePort" : "5CIJ5zDuh-D_oS190h-kl$$JA9lwagkXiBVJ-Irk37JI",
+    "target" : "fdmcicyfesmKQbXJ9F6QS$$739yTdCKbWWUQTMYQOVhM",
+    "targetPort" : "hchYRHIwJCkJTHkHCyk0r$$9OMOM46XEMYae15peLVMs"
+  } ],
+  "processes" : {
+    "k9syoIHQ592b0pYBEIKBp$$P2YFyxwJF8yP7DF0Y4fi8" : {
+      "id" : "k9syoIHQ592b0pYBEIKBp$$P2YFyxwJF8yP7DF0Y4fi8",
+      "component" : "Script",
+      "metadata" : {
+        "label" : "empty_dataframe",
+        "slug" : "empty_dataframe",
+        "x" : -420,
+        "y" : -140,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "SMf4nvCgkCu69RYE8fFMB$$bIASfdp5hv_iK-mUi8ywC",
+          "slug" : "out0",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "id",
+              "type" : "long",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : true
+      },
+      "properties" : {
+        "script" : "out0 = spark.range(1)",
+        "scriptMethodHeader" : "def Script(spark: SparkSession) -> DataFrame:",
+        "scriptMethodFooter" : "    return out0"
+      }
+    },
+    "E4s58VeeXUxKP-6UwlEIz$$6jNNKiFn9E_iIvBQm0wD6" : {
+      "id" : "E4s58VeeXUxKP-6UwlEIz$$6jNNKiFn9E_iIvBQm0wD6",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "text_to_vector",
+        "slug" : "text_to_vector",
+        "x" : -220,
+        "y" : -140,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "dQ2AuzVVZGBP2u53G0mVk$$lvCwaNYBZ-WXGpV_BAqkE",
+          "slug" : "empty_dataframe",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "id",
+              "type" : "long",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "5CIJ5zDuh-D_oS190h-kl$$JA9lwagkXiBVJ-Irk37JI",
+          "slug" : "out"
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      },
+      "properties" : {
+        "importLanguage" : "${$.workflow.metainfo.frontEndLanguage}",
+        "expressions" : [ {
+          "target" : "text",
+          "expression" : {
+            "format" : "sql",
+            "expression" : "'Some text to vectorize'"
+          },
+          "description" : ""
+        } ],
+        "importString" : "",
+        "activeTab" : "expressions",
+        "columnsSelector" : [ ]
+      },
+      "componentInfo" : {
+        "gemId" : "gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12654.git&subPath=&tag=0.0.4&projectSubscriptionProjectId=12654&path=gems/Reformat",
+        "projectName" : "ProphecySparkBasicsPython"
+      }
+    },
+    "fdmcicyfesmKQbXJ9F6QS$$739yTdCKbWWUQTMYQOVhM" : {
+      "id" : "fdmcicyfesmKQbXJ9F6QS$$739yTdCKbWWUQTMYQOVhM",
+      "component" : "Bedrock",
+      "metadata" : {
+        "label" : "embed",
+        "slug" : "embed",
+        "x" : -20,
+        "y" : -140,
+        "phase" : 0,
+        "cache" : false,
+        "detailedStats" : false,
+        "isImported" : false
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "hchYRHIwJCkJTHkHCyk0r$$9OMOM46XEMYae15peLVMs",
+          "slug" : "text_to_vector",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "text",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "outputs" : [ {
+          "id" : "dcjTMG8hRYdPpHWsXLoCN$$qwizD7JekUj1d4yIvg3y7",
+          "slug" : "out",
+          "schema" : {
+            "type" : "struct",
+            "fields" : [ {
+              "name" : "text",
+              "type" : "string",
+              "nullable" : false,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "bedrock_embedding",
+              "type" : {
+                "type" : "array",
+                "elementType" : "float",
+                "containsNull" : true
+              },
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            }, {
+              "name" : "bedrock_error",
+              "type" : "string",
+              "nullable" : true,
+              "metadata" : {
+                "description" : "",
+                "mappings" : [ ],
+                "tags" : [ ]
+              }
+            } ]
+          },
+          "isStreaming" : false
+        } ],
+        "selectedInputFields" : [ ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : true
+      },
+      "properties" : {
+        "aws_region" : "us-east-1",
+        "credential_manual_secret" : "",
+        "credential_manual_key" : "",
+        "credential_type" : "databricks",
+        "credential_db_scope" : "aws_main",
+        "credential_db_secret" : "secret_value",
+        "operation" : "embed_texts",
+        "embed_text_column_name" : "text",
+        "credential_db_key" : "secret_key"
+      },
+      "componentInfo" : {
+        "gemId" : "gems/Bedrock",
+        "projectName" : "spark-ai-gems"
+      }
+    }
+  },
+  "ports" : {
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "selectedInputFields" : [ ],
+    "isCustomOutputSchema" : false,
+    "autoUpdateOnRun" : false
+  }
+}
