@@ -36,3 +36,8 @@ Key features include:
 4. **Validations and State Management**: The validate and onChange methods provide utilities for validation and managing state changes of the component, respectively.
 
 In business terms, this component acts as a plug-and-play tool in a larger system, enabling users to seamlessly convert textual data into a machine-understandable format using a familiar UI while abstracting away the complexities of data transformation and AWS authentication.
+
+
+*** Release notes for version: 0.1.9 ***
+
+Adds the first version of Bedrock & SageMakerEndpoint gems 💎
