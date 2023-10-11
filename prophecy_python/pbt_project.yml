@@ -1,0 +1,98 @@
+name: spark-ai-gems
+description: ''
+version: 0.1.9
+author: maciej@prophecy.io
+language: python
+buildSystem: ''
+buildSystemDetails:
+  artefactID: spark_ai_gems
+  parentArtefactID: prophecy_io
+  buildSystem: wheel
+  author: null
+  createdAt: '2023-10-11 01:11:45'
+pipelines:
+  pipelines/BedrockTest:
+    name: BedrockTest
+    description: ''
+    author: maciej@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-10-11 03:18:47'
+    datasets:
+      inputs: []
+      outputs: []
+    subgraphs: []
+    dependencies: {}
+  pipelines/SageMakerEndpointTest:
+    name: SageMakerEndpointTest
+    description: ''
+    author: maciej@prophecy.io
+    mode: batch
+    artefactID: ''
+    language: python
+    createdAt: '2023-10-11 03:28:04'
+    datasets:
+      inputs: []
+      outputs: []
+    subgraphs: []
+    dependencies: {}
+datasets: {}
+templates: {}
+jobs: {}
+gemContainer:
+  languageVersion: '3.10'
+  gemLibsVersion: 1.3.2.0
+  gems:
+    gems/Bedrock:
+      name: Bedrock
+      category: Machine Learning
+      subCategory: ''
+      description: null
+      author: maciej@prophecy.io
+      mode: batch
+      files:
+      - prophecy_io_spark_ai_gems/gems/Bedrock.py
+      createdAt: '2023-10-11 01:12:21'
+    gems/SageMakerEndpoint:
+      name: SageMakerEndpoint
+      category: Machine Learning
+      subCategory: ''
+      description: null
+      author: maciej@prophecy.io
+      mode: batch
+      files:
+      - prophecy_io_spark_ai_gems/gems/SageMakerEndpoint.py
+      createdAt: '2023-10-11 01:14:11'
+functions:
+  author: null
+  createdAt: '2023-10-11 01:11:45'
+  udfs: {}
+  udafs: {}
+  expressions: {}
+subgraphs: {}
+sqlModels: {}
+sqlMacros: {}
+sqlSeeds: {}
+sqlSources: {}
+sqlUnreferencedSources: {}
+sqlPipeline: null
+dependencies: '[]'
+projectDependencies:
+  '12654':
+    projectUID: 12654
+    projectName: ProphecySparkBasicsPython
+    repositoryPath: gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12654.git&subPath=
+    version: 0.0.4
+    isDefault: true
+    author: null
+    createdAt: '2023-10-11 01:11:45'
+  '12655':
+    projectUID: 12655
+    projectName: ProphecyWarehousePython
+    repositoryPath: gitUri=http://gitserver:3000/DxEheDCJ_team_5751/DxEheDCJ_project_12655.git&subPath=
+    version: 0.0.2
+    isDefault: true
+    author: null
+    createdAt: '2023-10-11 01:11:45'
+pipelineConfigurations: {}
