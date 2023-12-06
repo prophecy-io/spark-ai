@@ -19,7 +19,7 @@ class TextProcessing(ComponentSpec):
     def dialog(self) -> Dialog:
         def iff(property_name: str, value, then: Atom) -> Condition:
             value_expr = BooleanExpr(value) if isinstance(value, bool) else StringExpr(str(value))
-            return Condition().ifEqual(PropExpr(f"component.properties.{property_name}"), value_expr).then(then)
+            return Condition().ifEqual(PropExpr(f"component.properties.{property_name}"), value_expr).then(then) 
         # Operation selection
         operation_selector = SelectBox("Operation type") \
             .addOption("Split text into equal chunks", "text_split_into_chunks") \

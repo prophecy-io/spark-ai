@@ -23,7 +23,7 @@ class OpenSearchLookup(ComponentSpec):
         credential_db_secrets: Optional[str] = "secrets"
 
         credential_manual_api_key: Optional[str] = ""
-        credential_manual_api_secrets: Optional[str] = ""
+        credential_manual_api_secrets: Optional[str] = "" 
 
         host: Optional[str] = ""
         region: Optional[str] = "us-west-1"

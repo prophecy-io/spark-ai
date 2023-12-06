@@ -7,7 +7,7 @@ from prophecy.cb.server.base.WorkflowContext import WorkflowContext
 from prophecy.cb.server.base.WorkflowContext import WorkflowContext
 class BinaryFormat(DatasetSpec):
     name: str = "binary"
-    datasetType: str = "File"
+    datasetType: str = "File" 
     def optimizeCode(self) -> bool:
         return True
     @dataclass(frozen=True)

@@ -22,7 +22,7 @@ class OpenAISpec(ComponentSpec):
         credential_db_key: Optional[str] = "token"
         credential_manual_token: Optional[str] = ""
 
-        # Potential values: embed_texts, chat_complete, answer_question
+        # Potential values: embed_texts, chat_complete, answer_question 
         operation: str = "embed_texts"
 
         group_data: Optional[bool] = True

@@ -10,7 +10,7 @@ from prophecy.cb.ui.uispec import *
 class PineconeFormatSpec(DatasetSpec):
     name: str = "pinecone"
     datasetType: str = "Warehouse"
-    docUrl: str = "https://docs.prophecy.io/low-code-spark/gems/source-target/file/text"
+    docUrl: str = "https://docs.prophecy.io/low-code-spark/gems/source-target/file/text" 
 
     def optimizeCode(self) -> bool:
         return False
@@ -25,7 +25,7 @@ class PineconeFormatSpec(DatasetSpec):
         credential_db_key: Optional[str] = "token"
         credential_manual_api_key: Optional[str] = ""
 
-        environment: Optional[str] = "us-east-1-aws"
+        environment: Optional[str] = "us-east-1-aws" 
         index_name: Optional[str] = ""
 
         vector_id_column_name: Optional[str] = ""
