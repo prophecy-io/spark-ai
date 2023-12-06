@@ -121,6 +121,39 @@ gemContainer:
       - prophecy_io_spark_ai_gems/gems/TextProcessing.py
       dependencies: null
       createdAt: '2023-12-06 06:46:22'
+    gems/OpenSearch:
+      name: OpenSearch
+      category: Source/Target
+      subCategory: Warehouse
+      description: null
+      author: sumitpaul@prophecy.io
+      mode: batch
+      files:
+      - prophecy_io_spark_ai_gems/gems/Opensearch.py
+      dependencies: null
+      createdAt: '2023-12-06 07:07:45'
+    gems/PineconeLookup:
+      name: PineconeLookup
+      category: Machine Learning
+      subCategory: ''
+      description: null
+      author: sumitpaul@prophecy.io
+      mode: batch
+      files:
+      - prophecy_io_spark_ai_gems/gems/PineconeLookup.py
+      dependencies: null
+      createdAt: '2023-12-06 07:09:37'
+    gems/Watermark:
+      name: Watermark
+      category: Transform
+      subCategory: ''
+      description: null
+      author: sumitpaul@prophecy.io
+      mode: batch
+      files:
+      - prophecy_io_spark_ai_gems/gems/Watermark.py
+      dependencies: null
+      createdAt: '2023-12-06 07:10:41'
   dependencies: null
 functions:
   author: null
