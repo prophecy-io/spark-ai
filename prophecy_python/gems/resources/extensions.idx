@@ -1,2 +1,10 @@
-prophecy_io_spark_ai_gems.gems.Bedrock.Bedrock
+prophecy_io_spark_ai_gems.gems.OpenAI.OpenAISpec
+prophecy_io_spark_ai_gems.gems.TextProcessing.TextProcessing
+prophecy_io_spark_ai_gems.gems.Binary.BinaryFormat
+prophecy_io_spark_ai_gems.gems.OpensearchLookup.OpenSearchLookup
 prophecy_io_spark_ai_gems.gems.SageMakerEndpoint.SageMakerEndpoint
+prophecy_io_spark_ai_gems.gems.Bedrock.Bedrock
+prophecy_io_spark_ai_gems.gems.PineconeLookup.PineconeLookup
+prophecy_io_spark_ai_gems.gems.Opensearch.OpenSearchFormat
+prophecy_io_spark_ai_gems.gems.Pinecone.PineconeFormatSpec
+prophecy_io_spark_ai_gems.gems.Watermark.Watermark

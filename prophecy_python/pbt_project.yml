@@ -42,7 +42,7 @@ templates: {}
 jobs: {}
 gemContainer:
   languageVersion: '3.10'
-  gemLibsVersion: 1.3.2.0
+  gemLibsVersion: 1.3.4.0
   gems:
     gems/Bedrock:
       name: Bedrock
@@ -53,6 +53,7 @@ gemContainer:
       mode: batch
       files:
       - prophecy_io_spark_ai_gems/gems/Bedrock.py
+      dependencies: null
       createdAt: '2023-10-11 01:12:21'
     gems/SageMakerEndpoint:
       name: SageMakerEndpoint
@@ -63,13 +64,104 @@ gemContainer:
       mode: batch
       files:
       - prophecy_io_spark_ai_gems/gems/SageMakerEndpoint.py
+      dependencies: null
       createdAt: '2023-10-11 01:14:11'
+    gems/OpenAI:
+      name: OpenAI
+      category: Machine Learning
+      subCategory: ''
+      description: null
+      author: sumitpaul@prophecy.io
+      mode: batch
+      files:
+      - prophecy_io_spark_ai_gems/gems/OpenAI.py
+      dependencies: null
+      createdAt: '2023-12-06 06:36:58'
+    gems/OpenSearchLookup:
+      name: OpenSearchLookup
+      category: Machine Learning
+      subCategory: ''
+      description: null
+      author: sumitpaul@prophecy.io
+      mode: batch
+      files:
+      - prophecy_io_spark_ai_gems/gems/OpensearchLookup.py
+      dependencies: null
+      createdAt: '2023-12-06 06:42:31'
+    gems/binary:
+      name: binary
+      category: Source/Target
+      subCategory: File
+      description: null
+      author: sumitpaul@prophecy.io
+      mode: batch
+      files:
+      - prophecy_io_spark_ai_gems/gems/Binary.py
+      dependencies: null
+      createdAt: '2023-12-06 06:43:14'
+    gems/pinecone:
+      name: pinecone
+      category: Source/Target
+      subCategory: Warehouse
+      description: null
+      author: sumitpaul@prophecy.io
+      mode: batch
+      files:
+      - prophecy_io_spark_ai_gems/gems/Pinecone.py
+      dependencies: null
+      createdAt: '2023-12-06 06:44:45'
+    gems/TextProcessing:
+      name: TextProcessing
+      category: Machine Learning
+      subCategory: null
+      description: null
+      author: sumitpaul@prophecy.io
+      mode: batch
+      files:
+      - prophecy_io_spark_ai_gems/gems/TextProcessing.py
+      dependencies: null
+      createdAt: '2023-12-06 06:46:22'
+    gems/OpenSearch:
+      name: OpenSearch
+      category: Source/Target
+      subCategory: Warehouse
+      description: null
+      author: sumitpaul@prophecy.io
+      mode: batch
+      files:
+      - prophecy_io_spark_ai_gems/gems/Opensearch.py
+      dependencies: null
+      createdAt: '2023-12-06 07:07:45'
+    gems/PineconeLookup:
+      name: PineconeLookup
+      category: Machine Learning
+      subCategory: ''
+      description: null
+      author: sumitpaul@prophecy.io
+      mode: batch
+      files:
+      - prophecy_io_spark_ai_gems/gems/PineconeLookup.py
+      dependencies: null
+      createdAt: '2023-12-06 07:09:37'
+    gems/Watermark:
+      name: Watermark
+      category: Transform
+      subCategory: ''
+      description: null
+      author: sumitpaul@prophecy.io
+      mode: batch
+      files:
+      - prophecy_io_spark_ai_gems/gems/Watermark.py
+      dependencies: null
+      createdAt: '2023-12-06 07:10:41'
+  dependencies: null
 functions:
   author: null
   createdAt: '2023-10-11 01:11:45'
   udfs: {}
   udafs: {}
   expressions: {}
+  airflowFunctions: {}
 subgraphs: {}
 sqlModels: {}
 sqlMacros: {}
