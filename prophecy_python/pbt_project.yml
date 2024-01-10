@@ -1,6 +1,6 @@
 name: spark-ai-gems
 description: ''
-version: 0.1.9
+version: 0.2.2
 author: maciej@prophecy.io
 language: python
 buildSystem: ''
@@ -187,4 +187,6 @@ projectDependencies:
     isDefault: true
     author: null
     createdAt: '2023-10-11 01:11:45'
+flags:
+  shouldAddDefaultDependenciesIfAbsent: true
 pipelineConfigurations: {}
