@@ -10,6 +10,13 @@ class FileTextUtils:
         spark.udf.register('text_split_into_chunks', self.split_into_chunks, returnType=ArrayType(StringType()))
 
     @staticmethod
-    def split_into_chunks(text: str, chunk_size: int = 100) -> List[str]:
+    def split_into_chunks(text: str, chunk_size: int = 100, overlap_size=0) -> List[str]:
         lst = text.split(' ')
-        return [' '.join(lst[i:i + chunk_size]) for i in range(0, len(lst), chunk_size)]
+        chunks=[]
+        #return [' '.join(lst[i:i + chunk_size]) for i in range(0, len(lst), chunk_size)]
+        for i in range(0, len(lst), chunk_size-overlap_size):
+            chunks.append(' '.join(lst[i:i + chunk_size]))
+            if(i+chunk_size >= len(lst)):
+                break
+        return chunks
+

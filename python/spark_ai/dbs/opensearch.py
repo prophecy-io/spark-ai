@@ -50,16 +50,14 @@ class OpensearchDB:
         spark.udf.register('opensearch_upsert', self.upsert, returnType=self.upsert_type())
         spark.udf.register('opensearch_query', self.query, returnType=self.query_type())
 
-    def upsert(self, index_name: str, vector_column: str, vectors: List[float], id_column: str, id_column_value: str) -> UpsertResponse :
+    def upsert(self, vector_jsn :str) -> UpsertResponse :
         client = self.register_opensearch()
 
         try:
-            payload = { "_index" : index_name, vector_column : vectors, id_column : id_column_value }
-            id_column : id_column_value
+            payload=json.loads(vector_jsn)
             upsert_vectors=[]
             upsert_vectors.append(payload)
             response = helpers.bulk(client, upsert_vectors)
-
             return UpsertResponse(count=response[0])
 
         except Exception as error:

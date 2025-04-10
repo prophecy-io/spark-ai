@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="prophecy-spark-ai",
-    version="0.1.9",
+    version="0.1.14",
     url="https://github.com/prophecy-io/spark-ai",
     packages=find_packages(exclude=["tests", "tests.*"]),
     package_dir={'spark_ai': 'spark_ai'},
@@ -12,12 +12,15 @@ setup(
     install_requires=[
         "slack-sdk>=3.21.3",
         "openai[datalib]>=0.27.8",
-        "pinecone-client>=2.2.2",
+        "pinecone>=6.0.0",
         "python-dotenv>=1.0.0",
         "requests>=2.31.0",
         "beautifulsoup4>=4.12.2",
-        "unstructured>=0.7.4",
-        "numpy>=1.24.3"
+        "unstructured[all-docs]>=0.16.14",
+        "numpy>=1.24.3",
+        "boto3>=1.28.62",
+        "opensearch-py>=2.6.0",
+        "pdf2image>=1.17.0"
     ],
     keywords=["python", "prophecy"],
     classifiers=[],
