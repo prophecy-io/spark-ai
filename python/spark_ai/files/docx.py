@@ -5,7 +5,6 @@ from unstructured.partition.docx import partition_docx
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
 
-
 class FileDocxUtils:
 
     def register_udfs(self, spark: SparkSession):
